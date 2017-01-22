@@ -1,0 +1,12 @@
+<% if current_user.admin %>
+<h1>Editing User</h1>
+<% else %>
+<h1>Modify your account</h1>
+<% end %>
+<%= render 'form', user: @user %>
+
+<% if current_user.admin %>
+<%= link_to 'Show', @user %>
+<br>
+<%= link_to 'Back', users_path %>
+<% end %>

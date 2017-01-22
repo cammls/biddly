@@ -1,0 +1,22 @@
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+<p>
+  <strong>Seller:</strong>
+  <%= link_to @product.user.username, @product.user %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+ <% if can? :update, @product %>
+<%= button_to 'Modify your product', edit_product_path(@product) , class: "btn btn-primary"%>
+<% end %>
+<%= link_to 'Back', products_path %>

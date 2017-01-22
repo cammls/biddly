@@ -1,0 +1,50 @@
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<% if current_user && current_user.admin %>
+<p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+  <strong>Admin:</strong>
+  <%= @user.admin %>
+</p>
+<% end %>
+
+<p>
+  <strong>Products:</strong>
+  <% if @user.products.empty? %>
+    No products yet.
+<% else %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @user.products.each do |product| %>
+        <td>  <%= link_to product.title,product %></td>
+        <td>  <%= product.description %> </td>
+        <td>  <%= product.price %></td>
+      </tr>
+      <% end %>
+      <tbody>
+      </table>
+      <% end %>
+    </p>
+
+ <% if can? :update, @user %>
+ <%= button_to 'Modify your account', modify_account_path(@user), class: "btn btn-primary" %>
+ <br>
+ <%= button_to 'Delete your account', delete_account_path, method: :delete,
+  data: { confirm: 'Are you sure you want to delete your account? This action is irreversible' },
+   class: "btn btn-danger"  %>
+
+<% end %>
