@@ -14,7 +14,9 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.title,product %></td>
+        <td> <% if !product.picture.file.nil? %>
+           <%= image_tag product.picture.thumb.url %>
+         <% end %> <%= link_to product.title,product %></td>
         <td><%= product.user.username %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>
