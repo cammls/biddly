@@ -9,8 +9,8 @@ class Ability
       else
         can [:create, :show], User
         can [:update, :destroy], User, :id => user.id
-        # TOTO: PREVENT GUESTS FROM CREATING PRODUCTS
-        can [:index, :show, :create], Product 
+        can [:index, :show], Product
+        can :create, Product if user.id
         can [:update, :destroy], Product, :user_id => user.id
 
       end
