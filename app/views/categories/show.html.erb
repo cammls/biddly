@@ -1,0 +1,41 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <% if @parent %>
+  <strong>Parent:</strong>
+  <%= @parent.name %>
+  <% end %>
+</p>
+<p>
+  <strong>Products:</strong>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Seller</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+
+  <%@category.products.each do |product| %>
+  <tr>
+   <td><% if !product.picture.file.nil? %>
+      <%= image_tag product.picture.thumb.url %>
+    <% end %><%= link_to product.title, product %> </td>
+   <td><%= link_to product.user.username, product.user %> </td>
+   <td><%= product.description %> </td>
+   <td><%= product.price %> </td>
+   </tr>
+  <% end %>
+    </tbody>
+</p>
+<% if current_user.admin %>
+<%= link_to 'Edit', edit_category_path(@category) %> <br>
+<%= link_to 'Back', categories_path %>
+<% end %>

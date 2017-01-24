@@ -1,10 +1,12 @@
 
 <h1>Products</h1>
 
+<%= link_to "Browse by Category", categories_url %>
 <table class="table table-hover">
   <thead>
     <tr>
       <th>Title</th>
+      <th>Category</th>
       <th>Seller</th>
       <th>Description</th>
       <th>Price</th>
@@ -17,7 +19,8 @@
         <td> <% if !product.picture.file.nil? %>
            <%= image_tag product.picture.thumb.url %>
          <% end %> <%= link_to product.title,product %></td>
-        <td><%= product.user.username %></td>
+        <td><%=link_to product.category.name, product.category %></td>
+        <td><%= link_to product.user.username, product.user %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>
       </tr>

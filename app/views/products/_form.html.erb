@@ -30,7 +30,11 @@
    <%= f.label :picture %><br>
    <%= f.file_field :picture %>
  </div>
-
+<%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select a category") %>
+<%= @categories %>
+ <% if current_user.admin %>
+<%= link_to 'Or create a new category', new_category_path %>
+<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

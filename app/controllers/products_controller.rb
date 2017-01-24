@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+     @categories = Category.all.map{|c| [ c.name, c.id , c.parent_id] }
   end
 
   # GET /products/1/edit
@@ -27,6 +28,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user_id = current_user.id
+    @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }

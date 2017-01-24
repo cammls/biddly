@@ -12,6 +12,7 @@ class Ability
         can [:index, :show], Product
         can :create, Product if user.id
         can [:update, :destroy], Product, :user_id => user.id
+        can [:index, :show], Category
 
       end
 
