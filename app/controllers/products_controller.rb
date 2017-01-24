@@ -2,6 +2,17 @@ class ProductsController < ApplicationController
   load_and_authorize_resource
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  def grouped_cat
+    @grouped_cat = Array.new
+    @cat= Array.new
+    Category.all.each do |cat|
+     if !cat.parent_id
+       @cat =[cat.name, Category.where("parent_id = ?", cat.id).map{|c| [c.name, c.id]}]
+       @grouped_cat.push(@cat)
+     end
+   end
+   return @grouped_cat
+  end
   # GET /products
   # GET /products.json
   def index
@@ -16,17 +27,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-     @categories = Category.all.map{|c| [ c.name, c.id , c.parent_id] }
-     @grouped_cat = Array.new
-     @cat= Array.new
-      Category.all.each do |cat|
-       if !cat.parent_id
-         @cat =[cat.name, Category.where("parent_id = ?", cat.id).map{|c| [c.name, c.id]}]
-         @grouped_cat.push(@cat)
-       end
-      #  @grouped_cat = @grouped_cat.map{|c| c.class}
-     end
-
+    @grouped_cat= grouped_cat
   end
 
   # GET /products/1/edit
@@ -36,6 +37,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    @grouped_cat= grouped_cat
     @product = Product.new(product_params)
     @product.user_id = current_user.id
     @product.category_id = params[:category_id]
@@ -46,6 +48,7 @@ class ProductsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
+        # redirect_to new_product_path
       end
     end
   end

@@ -16,6 +16,8 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+     @categories = Category.all.map{|c| [ c.name, c.id , c.parent_id] }
+    @parent_cat = Category.where("parent_id IS NULL").map{|c| [c.name, c.id] }
   end
 
   # GET /categories/1/edit
@@ -26,7 +28,9 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-
+    if params[:parent_id]
+      @category.parent_id = params[:parent_id]
+    end
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
