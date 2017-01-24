@@ -17,6 +17,16 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
      @categories = Category.all.map{|c| [ c.name, c.id , c.parent_id] }
+     @grouped_cat = Array.new
+     @cat= Array.new
+      Category.all.each do |cat|
+       if !cat.parent_id
+         @cat =[cat.name, Category.where("parent_id = ?", cat.id).map{|c| [c.name, c.id]}]
+         @grouped_cat.push(@cat)
+       end
+      #  @grouped_cat = @grouped_cat.map{|c| c.class}
+     end
+
   end
 
   # GET /products/1/edit
