@@ -1,7 +1,19 @@
-
-<h1>Products</h1>
+ <ul class="collection with-header">
+    <li class="collection-header"><h4>Products</h4></li>
+       <% @products.each do |product| %>
+       <li class="collection-item avatar">
+     <% if !product.picture.file.nil? %>
+       <%= image_tag product.picture.url, class:"circle" %>
+     <% end %>
+     <span class="title"> <%= link_to product.title,product %></span>
+     <p><%= product.price %> € <br>
+     </p>
+   </li>
+       <% end %>
+   </ul>
 
 <%= link_to "Browse by Category", categories_url %>
+<!--
 <table class="table table-hover">
   <thead>
     <tr>
@@ -28,7 +40,7 @@
   </tbody>
 </table>
 
-<br>
+<br> -->
 <% if current_user %>
 <%= link_to 'New Product', new_product_path %>
 <% end %>

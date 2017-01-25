@@ -16,7 +16,7 @@
     <%= f.text_field :name %>
   </div>
 
-  <%= select_tag(:parent_id, options_for_select(@parent_cat), :prompt => "Choose a Parent Category if needed")%>
+  <%= select_tag(:parent_id, options_for_select(@parent_cat), :prompt => "Choose a Parent Category if needed" ,class:"browser-default")%>
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -36,6 +36,7 @@ gem 'autoprefixer-rails'
 gem "cancancan"
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
+gem 'materialize-sass'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

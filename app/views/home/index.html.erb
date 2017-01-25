@@ -1,24 +1,52 @@
 
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Biddly, sell your products to the highest bidders!</h1>
-        <p class="lead">This is Biddly's home page.</p>
-        <% if current_user %>
-        <%= current_user.username%>
-        <% end %>
+    <!-- <div class="container">
+      <div class="starter-template"> -->
+        <br><br>
+        <h1 class="header center orange-text">Selly, the marketplace to sell and buy products!</h1>
+           <div class="row center">
+             <h5 class="header col s12 light">Let me think about the feature that will differentiate this marketplace from others</h5>
+           </div>
+           <div class="row center">
+             <a href="/" id="download-button" class="btn-large waves-effect waves-light orange">Call to action</a>
+           </div>
       </div>
-      <%= form_tag '/', :method => 'get' do %>
-        <p>
-          <%= text_field_tag :search, params[:search] %>
-          <%= submit_tag "Search", :title => nil %>
-        </p>
+      <% if current_user %>
+      <%= current_user.username%>
       <% end %>
+      <nav>
+    <div class="nav-wrapper">
+      <%= form_tag '/', :method => 'get' do %>
+        <div class="input-field">
+          <%= text_field_tag :search, params[:search],placeholder: 'Search products...' %>
+          <%= submit_tag "Search", :title => nil,:style => "display: none;" %>
+          <label for="search"><i class="material-icons">search</i></label>
+        </div>
+    <% end %>
+    </div>
+  </nav>
+  <div class="row">
       <% if @products %>
-        <%@products.to_ary.each do |p| %>
-        <%= p.title %>
-        <%= p.description %>
-        <%= p.price %>
-        <% end %>
-        <% end %>
-    </div><!-- /.container -->
+        <% @products.to_ary.each do |p| %>
+
+        <div class="col m3">
+        <div class="card small">
+  <div class="card-image waves-effect waves-block waves-light">
+    <% if !p.picture.file.nil? %>
+      <%= image_tag p.picture.square.url, :class => "activator" %>
+      <% end %>
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4"> <%= p.title %><i class="material-icons right">more_vert</i></span>
+    <p><%= link_to "Product page",p %> </p>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4"> <%= p.title %><i class="material-icons right">close</i></span>
+    <p>  <%= p.description %></p>
+    <p> Category: <%= p.category.name %></p>
+    <p>  <%= p.price %> € </p>
+  </div>
+</div>
+</div>
+<% end %>
+<% end %>
+</div>
