@@ -37,6 +37,7 @@ gem "cancancan"
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'materialize-sass'
+gem 'acts_as_shopping_cart','~> 0.4.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -23,6 +23,7 @@
        <ul class="right hide-on-med-and-down">
          <li><a href="/">Home</a></li>
          <li><%= link_to "Products", products_url %></li>
+         <li> <i class="material-icons">shopping_cart</i> <%= link_to "Shopping Cart",shopping_cart_path%> </li>
          <% if !current_user %>
          <li><%= link_to "Register",   '/register' %></li>
          <li><%= link_to "Log in", '/login' %></li>
@@ -74,7 +75,7 @@
         </footer>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  
+
   </body>
 
 </html>

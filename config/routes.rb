@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+resource :shopping_cart
+
+  # get 'cart/add/:id' => 'cart#add',as: :cart_add
+
   resources :categories
   post '/rate' => 'rater#create', :as => 'rate'
   resources :products

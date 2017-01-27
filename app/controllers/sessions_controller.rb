@@ -9,6 +9,9 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
    if user && user.authenticate(params[:session][:password])
      login user
+     if current_user.shopping_cart
+       session[:shopping_cart_id] = current_user.shopping_cart.id
+     end
      if params[:session][:remember_me]
        cookies.permanent.signed[:remember_me] = current_user.id
      end
@@ -22,6 +25,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:shopping_cart_id] = nil
     logout
     redirect_to '/', notice: "You have successfully logged out."
   end
